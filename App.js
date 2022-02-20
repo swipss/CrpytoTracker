@@ -2,14 +2,28 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import Home from "./src/screens/HomeScreen";
 import CoinDetails from "./src/screens/CoinDetailsScreen/components";
+import { NavigationContainer } from "@react-navigation/native";
+import Navigation from "./src/navigation";
+import WatchlistProvider from "./src/Contexts/WatchlistContext";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      {/* <Home /> */}
-      <CoinDetails />
-      <StatusBar style="light" />
-    </View>
+    <NavigationContainer
+      theme={{
+        colors: {
+          background: "#121212",
+        },
+      }}
+    >
+      <WatchlistProvider>
+        <View style={styles.container}>
+          <Navigation />
+          {/* <Home /> */}
+          {/* <CoinDetails /> */}
+          <StatusBar style="light" />
+        </View>
+      </WatchlistProvider>
+    </NavigationContainer>
   );
 }
 

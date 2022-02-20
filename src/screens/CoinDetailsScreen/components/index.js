@@ -1,6 +1,12 @@
-import { View, Text, Image, Dimensions, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Dimensions,
+  TextInput,
+  ActivityIndicator,
+} from "react-native";
 import React, { useEffect, useState } from "react";
-import Coin from "../../../../assets/data/crypto.json";
 import CoinDetailHeader from "./CoinDetailHeader";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "./styles";
@@ -10,44 +16,74 @@ import {
   ChartPathProvider,
   ChartYLabel,
 } from "@rainbow-me/animated-charts";
+import { useRoute } from "@react-navigation/native";
+import { getCoinData, getCoinMarketChart } from "../../../services/requests";
 
 export default function CoinDetails() {
+  const [coin, setCoin] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [coinValue, setCoinValue] = useState("1");
+  const [usdValue, setUsdValue] = useState("");
+  const [coinMarketData, setCoinMarketData] = useState(null);
+
+  const route = useRoute();
   const {
+    params: { coinId },
+  } = route;
+  // console.log(coinId);
+
+  const fetchCoinData = async () => {
+    setLoading(true);
+    const fetchedCoinData = await getCoinData(coinId);
+    const fetchedCoinMarketData = await getCoinMarketChart(coinId);
+    setCoin(fetchedCoinData);
+    setCoinMarketData(fetchedCoinMarketData);
+    setUsdValue(fetchedCoinData.market_data.current_price.usd.toString());
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchCoinData();
+  }, []);
+  if (loading || !coin || !coinMarketData) {
+    return <ActivityIndicator size="large" />;
+  }
+
+  const {
+    id,
     image: { small },
     name,
     symbol,
-    prices,
+    // prices,
     market_data: {
       market_cap_rank,
       current_price,
       price_change_percentage_24h,
     },
-  } = Coin;
-
-  const [coinValue, setCoinValue] = useState("1");
-  const [usdValue, setUsdValue] = useState(current_price.usd.toString());
+  } = coin;
+  const { prices } = coinMarketData;
 
   const percentageColor =
     price_change_percentage_24h < 0 ? "#ea3943" : "#16c784";
-
   const screenWidth = Dimensions.get("window").width;
-
-  useEffect(() => {
-    const floatValue = parseFloat(coinValue.replace(",", ".")) || 0;
-    setUsdValue((floatValue * current_price.usd).toString());
-  }, [coinValue]);
-
-  useEffect(() => {
-    const floatValue = parseFloat(usdValue.replace(",", ".")) || 0;
-    setCoinValue((floatValue / current_price.usd).toString());
-  }, [usdValue]);
-
   const formatCurrency = (value) => {
     "worklet";
     if (value === "") {
       return `$${current_price.usd.toFixed(2)}`;
     }
     return `$${parseFloat(value).toFixed(2)}`;
+  };
+
+  const changeCoinValue = (value) => {
+    setCoinValue(value);
+    const floatValue = parseFloat(value.replace(",", ".")) || 0;
+    setUsdValue((floatValue * current_price.usd).toString());
+  };
+
+  const changeUsdValue = (value) => {
+    setUsdValue(value);
+    const floatValue = parseFloat(value.replace(",", ".")) || 0;
+    setCoinValue((floatValue / current_price.usd).toString());
   };
 
   return (
@@ -59,6 +95,7 @@ export default function CoinDetails() {
         }}
       >
         <CoinDetailHeader
+          coinId={id}
           image={small}
           symbol={symbol}
           marketCapRank={market_cap_rank}
@@ -110,7 +147,7 @@ export default function CoinDetails() {
               style={styles.input}
               value={coinValue}
               keyboardType="numeric"
-              onChangeText={setCoinValue}
+              onChangeText={changeCoinValue}
             />
           </View>
           <View style={{ flexDirection: "row", flex: 1 }}>
@@ -119,7 +156,7 @@ export default function CoinDetails() {
               style={styles.input}
               value={usdValue}
               keyboardType="numeric"
-              onChangeText={setUsdValue}
+              onChangeText={changeUsdValue}
             />
           </View>
         </View>
