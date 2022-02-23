@@ -64,7 +64,7 @@ export default function CoinDetails() {
   const { prices } = coinMarketData;
 
   const percentageColor =
-    price_change_percentage_24h < 0 ? "#ea3943" : "#16c784";
+    price_change_percentage_24h < 0 ? "#ea3943" : "#16c784" || "white";
   const screenWidth = Dimensions.get("window").width;
   const formatCurrency = (value) => {
     "worklet";
@@ -120,7 +120,7 @@ export default function CoinDetails() {
               style={{ alignSelf: "center", marginRight: 3 }}
             />
             <Text style={styles.priceChange}>
-              {price_change_percentage_24h.toFixed(2)}%
+              {price_change_percentage_24h?.toFixed(2)}%
             </Text>
           </View>
         </View>

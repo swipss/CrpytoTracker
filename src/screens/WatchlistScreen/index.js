@@ -29,7 +29,7 @@ export default function Watchlist() {
     fetchWatchlistedCoins();
   }, [watchlistCoinIds]);
 
-  console.log(coins);
+  // console.log(coins);
   return (
     <FlatList
       data={coins}

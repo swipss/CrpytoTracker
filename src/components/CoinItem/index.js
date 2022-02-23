@@ -19,7 +19,7 @@ export default function CoinItem({ marketCoin }) {
   const navigation = useNavigation();
 
   const percentageColor =
-    price_change_percentage_24h < 0 ? "#ea3943" : "#16c784";
+    price_change_percentage_24h < 0 ? "#ea3943" : "#16c784" || "white";
 
   const normalizeMarketCap = (marketCap) => {
     if (marketCap > 1000000000000) {
@@ -66,7 +66,7 @@ export default function CoinItem({ marketCoin }) {
             style={{ alignSelf: "center", marginRight: 3 }}
           />
           <Text style={{ color: percentageColor }}>
-            {price_change_percentage_24h.toFixed(2)}%
+            {price_change_percentage_24h?.toFixed(2)}%
           </Text>
         </View>
       </View>
