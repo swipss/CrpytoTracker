@@ -15,7 +15,6 @@ export const styles = StyleSheet.create({
   valueChange: {
     fontWeight: "600",
     fontSize: 16,
-    color: "#16c784",
   },
   percentageChange: {
     color: "#fff",
@@ -32,8 +31,7 @@ export const styles = StyleSheet.create({
   },
   priceChangePercentageContainer: {
     flexDirection: "row",
-    backgroundColor: "#16c784",
-    paddingHorizontal: 3,
+    paddingHorizontal: 5,
     paddingVertical: 8,
     borderRadius: 5,
   },

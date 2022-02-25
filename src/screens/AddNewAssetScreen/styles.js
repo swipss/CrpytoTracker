@@ -22,4 +22,33 @@ export const styles = StyleSheet.create({
     backgroundColor: "#1e1e1e",
     color: "#fff",
   },
+  ticker: {
+    color: "grey",
+    fontWeight: "700",
+    fontSize: 20,
+    marginTop: 25,
+    marginLeft: 5,
+  },
+  boughtQuantityContainer: {
+    alignItems: "center",
+    marginTop: 50,
+    flex: 1,
+  },
+  buttonContainer: {
+    padding: 10,
+    alignItems: "center",
+    marginVertical: 30,
+    marginHorizontal: 25,
+    borderRadius: 5,
+  },
+  buttonText: {
+    fontSize: 17,
+    fontWeight: "700",
+  },
+  pricePerCoin: {
+    color: "grey",
+    fontWeight: "700",
+    fontSize: 17,
+    letterSpacing: 1,
+  },
 });

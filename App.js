@@ -5,6 +5,7 @@ import CoinDetails from "./src/screens/CoinDetailsScreen/components";
 import { NavigationContainer } from "@react-navigation/native";
 import Navigation from "./src/navigation";
 import WatchlistProvider from "./src/Contexts/WatchlistContext";
+import { RecoilRoot } from "recoil";
 
 export default function App() {
   return (
@@ -15,14 +16,16 @@ export default function App() {
         },
       }}
     >
-      <WatchlistProvider>
-        <View style={styles.container}>
-          <Navigation />
-          {/* <Home /> */}
-          {/* <CoinDetails /> */}
-          <StatusBar style="light" />
-        </View>
-      </WatchlistProvider>
+      <RecoilRoot>
+        <WatchlistProvider>
+          <View style={styles.container}>
+            <Navigation />
+            {/* <Home /> */}
+            {/* <CoinDetails /> */}
+            <StatusBar style="light" />
+          </View>
+        </WatchlistProvider>
+      </RecoilRoot>
     </NavigationContainer>
   );
 }
