@@ -35,7 +35,7 @@ export default function PortfolioAssetsItem({ assetItem }) {
         <Text style={styles.title}>{name}</Text>
         <Text style={styles.ticker}>{ticker}</Text>
       </View>
-      <View style={{ marginLeft: "auto" }}>
+      <View style={{ marginLeft: "auto", alignItems: "flex-end" }}>
         <Text style={styles.title}>${currentPrice}</Text>
         <View style={{ flexDirection: "row" }}>
           <AntDesign
@@ -50,7 +50,7 @@ export default function PortfolioAssetsItem({ assetItem }) {
               fontWeight: "600",
             }}
           >
-            {priceChangePercentage.toFixed(2)}%
+            {priceChangePercentage?.toFixed(2)}%
           </Text>
         </View>
       </View>

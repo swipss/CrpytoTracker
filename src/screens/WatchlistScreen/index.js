@@ -26,7 +26,9 @@ export default function Watchlist() {
   };
 
   useEffect(() => {
-    fetchWatchlistedCoins();
+    if (watchlistCoinIds.length > 0) {
+      fetchWatchlistedCoins();
+    }
   }, [watchlistCoinIds]);
 
   // console.log(coins);

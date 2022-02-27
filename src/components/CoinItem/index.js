@@ -23,16 +23,16 @@ export default function CoinItem({ marketCoin }) {
 
   const normalizeMarketCap = (marketCap) => {
     if (marketCap > 1000000000000) {
-      return `${Math.floor(marketCap / 1000000000000)} T`;
+      return `${(marketCap / 1000000000000).toFixed(3)} T`;
     }
     if (marketCap > 1000000000) {
-      return `${Math.floor(marketCap / 1000000000)} B`;
+      return `${(marketCap / 1000000000).toFixed(3)} B`;
     }
     if (marketCap > 1000000) {
-      return `${Math.floor(marketCap / 1000000)} M`;
+      return `${(marketCap / 1000000).toFixed(3)} M`;
     }
     if (marketCap > 1000) {
-      return `${Math.floor(marketCap / 1000)} K`;
+      return `${(marketCap / 1000).toFixed(3)} K`;
     }
     return 10;
   };
