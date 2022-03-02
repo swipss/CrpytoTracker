@@ -34,7 +34,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 5,
     paddingVertical: 8,
     borderRadius: 5,
-    alignItems: "flex-end",
   },
   assetsLabel: {
     color: "#fff",

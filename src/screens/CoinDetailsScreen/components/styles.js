@@ -34,4 +34,12 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: "#fff",
   },
+  filterContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    backgroundColor: "#2b2b2b",
+    paddingVertical: 5,
+    borderRadius: 5,
+    marginVertical: 10,
+  },
 });

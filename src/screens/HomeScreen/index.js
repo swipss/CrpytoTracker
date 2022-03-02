@@ -34,18 +34,32 @@ export default function Home() {
 
   return (
     <View>
-      <Text
+      <View
         style={{
-          color: "#fff",
-          fontFamily: "Poppins",
-          fontSize: 25,
-          letterSpacing: 1,
-          paddingHorizontal: 20,
-          paddingBottom: 5,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
-        Cryptoassets
-      </Text>
+        <Text
+          style={{
+            color: "#fff",
+            fontFamily: "Poppins",
+            fontSize: 25,
+            letterSpacing: 1,
+            paddingHorizontal: 20,
+            paddingBottom: 5,
+          }}
+        >
+          Cryptoassets
+        </Text>
+        <Text
+          style={{ color: "lightgrey", fontSize: 12, paddingHorizontal: 10 }}
+        >
+          Powered by CoinGecko
+        </Text>
+      </View>
+
       <FlatList
         data={coins}
         renderItem={({ item }) => <CoinItem marketCoin={item} />}

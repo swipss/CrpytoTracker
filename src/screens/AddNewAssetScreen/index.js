@@ -1,4 +1,12 @@
-import { View, Text, TextInput, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  KeyboardAvoidingView,
+  Keyboard,
+  Platform,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import SearchableDropDown from "react-native-searchable-dropdown";
 import { styles } from "./styles";
@@ -56,6 +64,7 @@ export default function AddNewAssetScreen() {
   const onAddNewAsset = async () => {
     const newAsset = {
       id: selectedCoin.id,
+      unique_id: selectedCoin.id + Math.random(0, 1e6),
       name: selectedCoin.name,
       image: selectedCoin.image.small,
       ticker: selectedCoin.symbol.toUpperCase(),
@@ -70,7 +79,11 @@ export default function AddNewAssetScreen() {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      keyboardVerticalOffset={80}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       <SearchableDropDown
         containerStyle={styles.dropdownContainer}
         itemStyle={styles.item}
@@ -123,6 +136,6 @@ export default function AddNewAssetScreen() {
           </Pressable>
         </>
       )}
-    </View>
+    </KeyboardAvoidingView>
   );
 }
